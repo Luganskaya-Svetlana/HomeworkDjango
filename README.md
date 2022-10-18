@@ -1,12 +1,12 @@
 # HomeworkDjango
 Python project for Yandex.Intensive 
 
-### install the project
+### Install the project
 ```bash 
 git clone https://github.com/Luganskaya-Svetlana/HomeworkDjango
 ```
 
-### create a virtual environment
+### Create a virtual environment
 Linux / MacOS
 
 ```bash
@@ -22,14 +22,17 @@ venv\Scripts\activate
 ```
 
 
-### install required libraries
+### Install required libraries
 ```bash
 pip install -r requirements.txt
 ```
 
 
-### run the project 
+### Run the project 
 ```bash
 cd mysite
 py manage.py runserver
 ```
+
+### Workflow status
+![workflow](https://github.com/Luganskaya-Svetlana/HomeworkDjango/actions/workflows/python-package.yml/badge.svg)
