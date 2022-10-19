@@ -34,5 +34,10 @@ cd mysite
 py manage.py runserver
 ```
 
+### Configure .env
+Confidential information is stored in the .env file.
+In settings.py there are default values of SECRET_KEY, DEBUG and ALLOWED_HOSTS, so you can just run the project. But if you want to change default values, create .env file, copy text from env.example, paste it to .env and make desired changes.
+
+
 ### Workflow status
 ![workflow](https://github.com/Luganskaya-Svetlana/HomeworkDjango/actions/workflows/python-package.yml/badge.svg)
