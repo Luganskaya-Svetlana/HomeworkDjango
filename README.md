@@ -4,6 +4,7 @@ Python project for Yandex.Intensive
 
 ### Workflow status
 ![workflow](https://github.com/Luganskaya-Svetlana/HomeworkDjango/actions/workflows/python-package.yml/badge.svg)
+![workflow_django](https://github.com/Luganskaya-Svetlana/HomeworkDjango/actions/workflows/django.yml/badge.svg)
 
 
 ### Install the project
