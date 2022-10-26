@@ -1,5 +1,5 @@
 from django.http import HttpResponse
 
 
-def describtion(request):
+def description(request):
     return HttpResponse('Чудесное описание')
