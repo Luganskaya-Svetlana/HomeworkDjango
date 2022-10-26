@@ -8,37 +8,24 @@ class StaticURLTests(TestCase):
 
 
 class RegexTests(TestCase):
-    def test_catalog_normal_num_endpoint(self):
-        responses = ['/catalog/123/', '/catalog/12/', '/catalog/1/']
-        for resp in responses:
-            with self.subTest(resp=resp):
-                response = Client().get(resp)
-                self.assertEqual(response.status_code, 200)
+    def test_catalog_normal_resp_endpoint(self):
+        run_tests(self, ('/catalog/123/', '/catalog/12/', '/catalog/1/'), 200)
 
-    def test_unormal_num_endpoint(self):
-        responses = ['/catalog/0/', '/catalog/01', '/catalog/000/',
-                     'catalog/-1/']
-        for resp in responses:
-            with self.subTest(resp=resp):
-                response = Client().get(resp)
-                self.assertEqual(response.status_code, 404)
-
-    def test_catalog_mixed_endpoint(self):
-        responses = ['/catalog/12s/', '/catalog/s12', '/catalog/0a/',
-                     'catalog/a0/', 'catalog/a0a/', 'catalog/1a0/',
-                     '/catalog/1-1/', '/catalog/1+1/', '/catalog/1*1/',
-                     '/catalog/*s1/', '/catalog/123*1s/', '/catalog/+1/',
-                     '/catalog/*1/', '/catalog/1*']
-        for resp in responses:
-            with self.subTest(resp=resp):
-                response = Client().get(resp)
-                self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_endpoint(self):
-        responses = ['/catalog/s/', '/catalog/s ', '/catalog/-abc/',
+    def test_catalog_unormal_resp_endpoint(self):
+        responses = ('/catalog/0/', '/catalog/01', '/catalog/000/',
+                     'catalog/-1/', '/catalog/12s/', '/catalog/s12',
+                     '/catalog/0a/', 'catalog/a0/', 'catalog/a0a/',
+                     'catalog/1a0/', '/catalog/1-1/', '/catalog/1+1/',
+                     '/catalog/1*1/', '/catalog/*s1/', '/catalog/123*1s/',
+                     '/catalog/+1/', '/catalog/*1/', '/catalog/1*',
+                     '/catalog/s/', '/catalog/s ', '/catalog/-abc/',
                      '/catalog/*/', '/catalog/+/', '/catalog/-/',
-                     '/catalog/    /']
-        for resp in responses:
-            with self.subTest(resp=resp):
-                response = Client().get(resp)
-                self.assertEqual(response.status_code, 404)
+                     '/catalog/    /')
+        run_tests(self, responses, 404)
+
+
+def run_tests(test, responses, expected_status):
+    for resp in responses:
+        with test.subTest(resp=resp):
+            response = Client().get(resp)
+            test.assertEqual(response.status_code, expected_status)
