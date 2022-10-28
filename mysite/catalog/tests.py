@@ -9,10 +9,11 @@ class StaticURLTests(TestCase):
 
 class RegexTests(TestCase):
     def test_catalog_normal_resp_endpoint(self):
-        run_tests(self, ('/catalog/123/', '/catalog/12/', '/catalog/1/'), 200)
+        endpoints = ('/catalog/123/', '/catalog/12/', '/catalog/1/')
+        run_tests(self, endpoints, 200)
 
-    def test_catalog_unormal_resp_endpoint(self):
-        responses = ('/catalog/0/', '/catalog/01', '/catalog/000/',
+    def test_catalog_unnormal_resp_endpoint(self):
+        endpoints = ('/catalog/0/', '/catalog/01', '/catalog/000/',
                      'catalog/-1/', '/catalog/12s/', '/catalog/s12',
                      '/catalog/0a/', 'catalog/a0/', 'catalog/a0a/',
                      'catalog/1a0/', '/catalog/1-1/', '/catalog/1+1/',
@@ -21,11 +22,11 @@ class RegexTests(TestCase):
                      '/catalog/s/', '/catalog/s ', '/catalog/-abc/',
                      '/catalog/*/', '/catalog/+/', '/catalog/-/',
                      '/catalog/    /')
-        run_tests(self, responses, 404)
+        run_tests(self, endpoints, 404)
 
 
-def run_tests(test, responses, expected_status):
-    for resp in responses:
-        with test.subTest(resp=resp):
-            response = Client().get(resp)
+def run_tests(test, endpoints, expected_status):
+    for endpoint in endpoints:
+        with test.subTest(endpoint=endpoint):
+            response = Client().get(endpoint)
             test.assertEqual(response.status_code, expected_status)
