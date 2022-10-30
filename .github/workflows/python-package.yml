@@ -28,6 +28,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
+        flake8 --per-file-ignores = */migrations/: E501
         flake8 . --count --show-source --statistics
     - name: Run Tests
       run: |
