@@ -12,8 +12,9 @@ class PublishedBaseModel(models.Model):
 
 
 class SlugBaseModel(models.Model):
-    slug = models.CharField(name='slug', max_length=200, unique=True,
-                            validators=[validate_slug])
+    slug = models.SlugField(name='slug', max_length=200, unique=True,
+                            validators=[validate_slug],
+                            verbose_name='Идентификатор (slug)')
 
     class Meta:
         abstract = True
