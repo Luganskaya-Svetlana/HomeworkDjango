@@ -1,0 +1,147 @@
+[
+{
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "slug": "new",
+        "name": "Новые товары"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "slug": "discount",
+        "name": "Товары со скидкой"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "slug": "popular",
+        "name": "Популярные товары"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+        "is_published": true,
+        "slug": "out_of_stock",
+        "name": "Товара нет в наличии"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+        "is_published": true,
+        "slug": "in_stock",
+        "name": "Товар в наличии"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "slug": "food",
+        "name": "Еда",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "slug": "clothes",
+        "name": "Одежда",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "slug": "school",
+        "name": "Товары для школы",
+        "weight": 101
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "name": "Шоколадка",
+        "text": "Превосходно поднимет настроение :)",
+        "category": 1,
+        "tags": [
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "name": "Мороженое",
+        "text": "Превосходно поможет охладиться в жаркий летний день.",
+        "category": 1,
+        "tags": [
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "name": "Зимняя куртка",
+        "text": "Превосходно согреет зимой. И будет роскошно смотреться на любом человеке.",
+        "category": 2,
+        "tags": [
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+        "is_published": true,
+        "name": "Тетрадка в клетку",
+        "text": "Благодаря этой тетрадке любой ученик будет учиться просто роскошно!",
+        "category": 3,
+        "tags": [
+            2,
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+        "is_published": true,
+        "name": "Ручка",
+        "text": "С помощью этой ручки любой первоклассник будет превосходно писать.",
+        "category": 3,
+        "tags": [
+            3,
+            5
+        ]
+    }
+}
+]
