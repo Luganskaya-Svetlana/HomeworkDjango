@@ -24,8 +24,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'homepage.apps.HomepageConfig',
     'catalog.apps.CatalogConfig',
-    'core.apps.CoreConfig',
-    'django_rename_app'
+    'core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [
