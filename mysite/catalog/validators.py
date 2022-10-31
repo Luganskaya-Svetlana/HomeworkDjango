@@ -6,4 +6,5 @@ def validate_perfect(value):
     for elem in must_words:
         if elem.lower() in value.lower():
             return
-    raise ValidationError(f'Обязательно используйте {must_words}')
+    words = ', '.join(must_words)
+    raise ValidationError(f'Обязательно используйте {words}')
