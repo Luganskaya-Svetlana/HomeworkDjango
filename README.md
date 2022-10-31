@@ -32,6 +32,12 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### Configure DataBase
+```bash
+cd mysite
+py manage.py migrate
+py manage.py loaddata catalog/fixtures/data.json
+```
 
 ### Run the project 
 ```bash
