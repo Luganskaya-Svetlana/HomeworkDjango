@@ -3,6 +3,10 @@ from django.test import Client, TestCase
 
 from .models import Category, Item, Tag
 
+'''Не стала выносить строчки 22-24 и соотв. 33-35 как отдельную функцию,
+т.к. в негативных тестах есть with self.assertRaises(ValidationError).
+Но про DRY помню :)'''
+
 
 class ModelTest(TestCase):
     @classmethod
@@ -14,16 +18,18 @@ class ModelTest(TestCase):
                                      slug='test-tag-slug')
 
     def test_unable_create_without_words(self):
-        item_count = Item.objects.count()
-
-        with self.assertRaises(ValidationError):
-            self.create_item('описание без нужных слов')
-
-        self.assertEqual(Item.objects.count(), item_count)
+        wrong_words = ['', 'нероскошно', 'йлцорудыфвпревосходнойцуйцлур']
+        for word in wrong_words:
+            with self.subTest(word=word):
+                item_count = Item.objects.count()
+                with self.assertRaises(ValidationError):
+                    self.create_item(f'описание без нужных слов, но с {word}')
+                self.assertEqual(Item.objects.count(), item_count)
 
     def test_able_create_with_words(self):
         must_words = ['роскошно', 'превосходно', 'Роскошно', 'Превосходно',
-                      'РОСКОШНО', 'ПРЕВОСХОДНО']
+                      'РОСКОШНО', 'ПРЕВОСХОДНО', 'превосходно!',
+                      'превосходно?', 'роскошно,', 'роскошно.']
         for word in must_words:
             with self.subTest(word=word):
                 item_count = Item.objects.count()
