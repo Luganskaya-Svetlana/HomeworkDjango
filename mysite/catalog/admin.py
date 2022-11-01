@@ -1,5 +1,6 @@
-from catalog.models import Category, Item, Tag
 from django.contrib import admin
+
+from .models import Category, Item, Tag
 
 
 @admin.register(Item)
