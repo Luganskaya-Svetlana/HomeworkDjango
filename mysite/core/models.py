@@ -1,10 +1,8 @@
-from django.core.validators import validate_slug
 from django.db import models
 
 
 class PublishedBaseModel(models.Model):
-    is_published = models.BooleanField(name='is_published',
-                                       verbose_name='Опубликовано',
+    is_published = models.BooleanField('опубликовано', name='is_published',
                                        default=True)
 
     class Meta:
@@ -12,9 +10,8 @@ class PublishedBaseModel(models.Model):
 
 
 class SlugBaseModel(models.Model):
-    slug = models.SlugField(name='slug', max_length=200, unique=True,
-                            validators=[validate_slug],
-                            verbose_name='Идентификатор (slug)')
+    slug = models.SlugField('идентификатор (slug)', max_length=200,
+                            unique=True)
 
     class Meta:
         abstract = True
