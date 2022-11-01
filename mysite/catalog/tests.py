@@ -8,18 +8,16 @@ class ModelTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.category = Category.objects.create(is_published=True,
-                                               name='Тестовая категория',
+        cls.category = Category.objects.create(name='Тестовая категория',
                                                slug='test-category-slug')
-        cls.tag = Tag.objects.create(is_published=True,
-                                     name='Тестовый тэг',
+        cls.tag = Tag.objects.create(name='Тестовый тэг',
                                      slug='test-tag-slug')
 
     def test_unable_create_without_words(self):
         item_count = Item.objects.count()
 
         with self.assertRaises(ValidationError):
-            create_item(self, 'описание без нужных слов')
+            self.create_item('описание без нужных слов')
 
         self.assertEqual(Item.objects.count(), item_count)
 
@@ -29,8 +27,16 @@ class ModelTest(TestCase):
         for word in must_words:
             with self.subTest(word=word):
                 item_count = Item.objects.count()
-                create_item(self, f'описание с {word}')
+                self.create_item(f'описание с {word}')
                 self.assertEqual(Item.objects.count(), item_count + 1)
+
+    def create_item(self, text):
+        self.item = Item(name='Тест',
+                         category=self.category,
+                         text=text)
+        self.item.full_clean()
+        self.item.save()
+        self.item.tags.add(self.tag)
 
 
 class StaticURLTests(TestCase):
@@ -42,7 +48,7 @@ class StaticURLTests(TestCase):
 class RegexTests(TestCase):
     def test_catalog_normal_resp_endpoint(self):
         endpoints = ('/catalog/123/', '/catalog/12/', '/catalog/1/')
-        run_tests(self, endpoints, 200)
+        self.run_tests(endpoints, 200)
 
     def test_catalog_unnormal_resp_endpoint(self):
         endpoints = ('/catalog/0/', '/catalog/01', '/catalog/000/',
@@ -54,20 +60,10 @@ class RegexTests(TestCase):
                      '/catalog/s/', '/catalog/s ', '/catalog/-abc/',
                      '/catalog/*/', '/catalog/+/', '/catalog/-/',
                      '/catalog/    /')
-        run_tests(self, endpoints, 404)
+        self.run_tests(endpoints, 404)
 
-
-def run_tests(test, endpoints, expected_status):
-    for endpoint in endpoints:
-        with test.subTest(endpoint=endpoint):
-            response = Client().get(endpoint)
-            test.assertEqual(response.status_code, expected_status)
-
-
-def create_item(test, text):
-    test.item = Item(name='Тест',
-                     category=test.category,
-                     text=text)
-    test.item.full_clean()
-    test.item.save()
-    test.item.tags.add(test.tag)
+    def run_tests(self, endpoints, expected_status):
+        for endpoint in endpoints:
+            with self.subTest(endpoint=endpoint):
+                response = Client().get(endpoint)
+                self.assertEqual(response.status_code, expected_status)
