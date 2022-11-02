@@ -8,7 +8,8 @@ def validate_perfect(*must_words):
     @wraps(validate_perfect)
     def validate_wrapped(value):
         clean_value = clean_text(value, punctuation)
-        words_in_value = list(map(lambda word: word.lower(), clean_value.split()))
+        words_in_value = list(map(lambda word: word.lower(),
+                                  clean_value.split()))
         for elem in must_words:
             if elem.lower() in words_in_value:
                 return
