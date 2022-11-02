@@ -3,10 +3,6 @@ from django.test import Client, TestCase
 
 from .models import Category, Item, Tag
 
-'''Не стала выносить строчки 22-24 и соотв. 33-35 как отдельную функцию,
-т.к. в негативных тестах есть with self.assertRaises(ValidationError).
-Но про DRY помню :)'''
-
 
 class ModelTest(TestCase):
     @classmethod
