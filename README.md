@@ -33,6 +33,8 @@ pip install -r requirements.txt
 ```
 
 ### Configure DataBase
+Commited db is just an example. 
+For loading data to a new db use:
 ```bash
 cd mysite
 py manage.py migrate
