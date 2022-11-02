@@ -46,7 +46,8 @@ class Item(PublishedBaseModel):
                             default='Здесь должно быть название')
     text = models.TextField(verbose_name='Описание',
                             default='',
-                            validators=[validate_perfect],
+                            validators=[validate_perfect('роскошно',
+                                                         'превосходно')],
                             help_text=('Обязательно используйте слово роскошно'
                                        ' или превосходно!'))
     category = models.ForeignKey(Category,
