@@ -20,5 +20,5 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    fields = ('name', 'slug', 'is_published')
+    fields = ('name', 'slug', 'weight', 'is_published')
     list_display = ('name', 'is_published')

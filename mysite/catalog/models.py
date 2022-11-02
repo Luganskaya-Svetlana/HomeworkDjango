@@ -14,6 +14,7 @@ class Tag(PublishedBaseModel, SlugBaseModel):
     class Meta:
         verbose_name = 'тэг'
         verbose_name_plural = 'тэги'
+        default_related_name = 'tags'
 
     def __str__(self):
         return self.name
@@ -24,11 +25,11 @@ class Category(PublishedBaseModel, SlugBaseModel):
                             max_length=150,
                             help_text='Максимум 150 символов',
                             default='Здесь должно быть название', unique=True)
-    weight = models.IntegerField('вес',
-                                 default=100,
-                                 help_text='Целое число x, 0 < x < 32767',
-                                 validators=[MinValueValidator(1),
-                                             MaxValueValidator(32766)],)
+    weight = models.SmallIntegerField('вес',
+                                      default=100,
+                                      help_text='Целое число x, 0 < x < 32767',
+                                      validators=[MinValueValidator(1),
+                                                  MaxValueValidator(32766)])
 
     class Meta:
         verbose_name = 'категория'
@@ -48,9 +49,11 @@ class Item(PublishedBaseModel):
                             validators=[validate_perfect],
                             help_text=('Обязательно используйте слово роскошно'
                                        ' или превосходно!'))
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
                                  verbose_name='категория')
-    tags = models.ManyToManyField(Tag, verbose_name='тэги')
+    tags = models.ManyToManyField(Tag,
+                                  verbose_name='тэги')
 
     class Meta:
         verbose_name = 'товар'
