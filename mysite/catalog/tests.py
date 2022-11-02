@@ -29,7 +29,8 @@ class ModelTest(TestCase):
     def test_able_create_with_words(self):
         must_words = ['роскошно', 'превосходно', 'Роскошно', 'Превосходно',
                       'РОСКОШНО', 'ПРЕВОСХОДНО', 'превосходно!',
-                      'превосходно?', 'роскошно,', 'роскошно.']
+                      'превосходно?', 'роскошно,', 'роскошно.',
+                      'превосходно,роскошно', 'Супер (роскошно)']
         for word in must_words:
             with self.subTest(word=word):
                 item_count = Item.objects.count()
