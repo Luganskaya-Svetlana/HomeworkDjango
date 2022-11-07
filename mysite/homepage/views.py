@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse('Главная страница великолепного сайта')
+    template_name = 'homepage/homepage.html'
+    return render(request, template_name)
