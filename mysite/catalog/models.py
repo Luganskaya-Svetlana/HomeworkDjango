@@ -86,7 +86,8 @@ class Item(PublishedBaseModel):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='media/%Y/%m',
-                              default='')
+                              default='',
+                              verbose_name='фото')
     item = models.ForeignKey(Item, on_delete=models.CASCADE,
                              verbose_name='товар')
 
@@ -101,10 +102,13 @@ class Gallery(models.Model):
             )
         return 'Нет изображения'
 
-    image_tmb.short_description = 'фотогалерея'
+    image_tmb.short_description = 'фото для галереи'
     image_tmb.allow_tags = True
 
     class Meta:
-        verbose_name = 'фотогалерея'
-        verbose_name_plural = 'фото из галереи'
+        verbose_name = 'фото для галереи'
+        verbose_name_plural = 'фото для галереи'
         default_related_name = 'gallery'
+
+    def __str__(self):
+        return f'Одно из фото для {self.item}'
