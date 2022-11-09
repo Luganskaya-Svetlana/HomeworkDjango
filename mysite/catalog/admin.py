@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Item, Tag
+from .models import Category, Gallery, Item, Tag
 
 
 @admin.register(Item)
@@ -22,3 +22,8 @@ class TagAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     fields = ('name', 'slug', 'weight', 'is_published')
     list_display = ('name', 'is_published')
+
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('image_tmb', 'item')

@@ -82,3 +82,29 @@ class Item(PublishedBaseModel):
 
     image_tmb.short_description = 'превью'
     image_tmb.allow_tags = True
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='media/%Y/%m',
+                              default='')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,
+                             verbose_name='товар')
+
+    @property
+    def get_img(self):
+        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
+
+    def image_tmb(self):
+        if self.image:
+            return mark_safe(
+                f'<img src="{self.get_img.url}">'
+            )
+        return 'Нет изображения'
+
+    image_tmb.short_description = 'фотогалерея'
+    image_tmb.allow_tags = True
+
+    class Meta:
+        verbose_name = 'фотогалерея'
+        verbose_name_plural = 'фото из галереи'
+        default_related_name = 'gallery'
