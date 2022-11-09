@@ -5,9 +5,21 @@
     <span class="navbar-text">
         {% with request.resolver_match.view_name as view_name %}
         <ul>
-            <li><a href="{% url 'homepage:home' %}">На главную</a></li>
-            <li><a href="{% url 'about:description' %}">О проекте</a></li>
-            <li><a href="{% url 'catalog:list'%}">Список товаров</a></li>
+            {% if view_name == 'homepage:home'%}
+                <li><a href="{% url 'homepage:home' %}"><b>На главную</b></a></li>
+            {% else %}
+                <li><a href="{% url 'homepage:home' %}">На главную</a></li>
+            {% endif %}
+            {% if view_name == 'about:description' %}
+                <li><a href="{% url 'about:description' %}"><b>О проекте</b></a></li>
+            {% else %}
+                <li><a href="{% url 'about:description' %}">О проекте</a></li>
+            {% endif %}
+            {% if view_name == 'catalog:list'%}
+                <li><a href="{% url 'catalog:list'%}"><b>Список товаров</b></a></li>
+            {% else %}
+                <li><a href="{% url 'catalog:list'%}">Список товаров</a></li>
+            {% endif %}
         </ul>
         {% endwith %}
     </span>
