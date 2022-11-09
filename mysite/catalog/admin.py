@@ -5,8 +5,8 @@ from .models import Category, Item, Tag
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    fields = ('name', 'text', 'category', 'tags', 'is_published')
-    list_display = ('name', 'is_published')
+    fields = ('name', 'text', 'category', 'tags', 'is_published', 'image')
+    list_display = ('name', 'is_published', 'image_tmb')
     list_editable = ('is_published',)
     list_display_links = ('name',)
     filter_horizontal = ('tags',)

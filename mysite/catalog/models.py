@@ -1,6 +1,8 @@
 from core.models import PublishedBaseModel, SlugBaseModel
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 
 from .validators import validate_perfect
 
@@ -56,6 +58,9 @@ class Item(PublishedBaseModel):
     tags = models.ManyToManyField(Tag,
                                   verbose_name='тэги')
 
+    image = models.ImageField('изображение', upload_to='media/%Y/%m',
+                              default='')
+
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
@@ -63,3 +68,17 @@ class Item(PublishedBaseModel):
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_img(self):
+        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
+
+    def image_tmb(self):
+        if self.image:
+            return mark_safe(
+                f'<img src="{self.get_img.url}">'
+            )
+        return 'Нет изображения'
+
+    image_tmb.short_description = 'превью'
+    image_tmb.allow_tags = True
