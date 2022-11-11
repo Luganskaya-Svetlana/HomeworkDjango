@@ -1,4 +1,5 @@
 from django.db import models
+from sorl.thumbnail import get_thumbnail
 
 
 class PublishedBaseModel(models.Model):
@@ -15,3 +16,12 @@ class SlugBaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ImagesBaseModel(models.Model):
+    image = models.ImageField('изображение', upload_to='media/%Y/%m',
+                              default='')
+
+    @property
+    def get_img(self):
+        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
