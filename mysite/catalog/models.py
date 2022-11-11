@@ -1,4 +1,4 @@
-from core.models import PublishedBaseModel, SlugBaseModel
+from core.models import ImageBaseModel, PublishedBaseModel, SlugBaseModel
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.safestring import mark_safe
@@ -84,16 +84,9 @@ class Item(PublishedBaseModel):
     image_tmb.allow_tags = True
 
 
-class Gallery(models.Model):
-    image = models.ImageField(upload_to='media/%Y/%m',
-                              default='',
-                              verbose_name='фото')
+class GalleryImage(ImageBaseModel):
     item = models.ForeignKey(Item, on_delete=models.CASCADE,
                              verbose_name='товар')
-
-    @property
-    def get_img(self):
-        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
 
     def image_tmb(self):
         if self.image:
@@ -102,13 +95,47 @@ class Gallery(models.Model):
             )
         return 'Нет изображения'
 
-    image_tmb.short_description = 'фото для галереи'
+    image_tmb.short_description = 'изображение для галереи'
     image_tmb.allow_tags = True
 
     class Meta:
-        verbose_name = 'фото для галереи'
-        verbose_name_plural = 'фото для галереи'
+        verbose_name = 'изображение для галереи'
+        verbose_name_plural = 'изображения для галереи'
         default_related_name = 'gallery'
 
     def __str__(self):
-        return f'Одно из фото для {self.item}'
+        return f'Одно из изображений для {self.item}'
+
+
+class MainImage(ImageBaseModel):
+    class Meta:
+        verbose_name = 'главное изображение'
+        verbose_name_plural = 'главные изображения'
+        default_related_name = 'main_image'
+
+    @property
+    def get_small_img(self):
+        return get_thumbnail(self.image, '50x50', crop='center', quality=51)
+
+    def image_tmb_small(self):
+        if self.image:
+            return mark_safe(
+                f'<img src="{self.get_small_img.url}">'
+            )
+        return 'Нет изображения'
+
+    image_tmb_small.short_description = 'превью'
+    image_tmb_small.allow_tags = True
+
+    def image_tmb(self):
+        if self.image:
+            return mark_safe(
+                f'<img src="{self.get_img.url}">'
+            )
+        return 'Нет изображения'
+
+    image_tmb.short_description = 'главное фото'
+    image_tmb.allow_tags = True
+
+    def __str__(self):
+        return f'Главное изображение для {self.item}'
