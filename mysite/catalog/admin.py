@@ -18,6 +18,8 @@ class GalleryImageInline(admin.TabularInline):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     fields = ('name', 'text', 'category', 'tags', 'is_published')
+    summernote_fields = ('text',)
+    # summernote_fields = '__all__'
     inlines = (MainImageInline, GalleryImageInline)
     list_display = ('name', 'is_published', 'main_image_tmb',)
     list_editable = ('is_published',)
