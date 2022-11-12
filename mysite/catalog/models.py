@@ -69,7 +69,7 @@ class Item(PublishedBaseModel):
     def main_image_tmb(self):
         if self.main_image:
             return mark_safe(
-                f'<img src="{self.main_image.get_img.url}">'
+                f'<img src="{self.main_image.get_small_img.url}">'
             )
         return 'Нет изображения'
 

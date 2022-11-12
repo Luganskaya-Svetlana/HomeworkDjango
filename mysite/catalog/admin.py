@@ -5,10 +5,14 @@ from .models import Category, GalleryImage, Item, Tag, MainImage
 
 class MainImageInline(admin.TabularInline):
     model = MainImage
+    readonly_fields = ('image_tmb',)
+    fields = ('image', 'image_tmb')
 
 
 class GalleryImageInline(admin.TabularInline):
     model = GalleryImage
+    readonly_fields = ('image_tmb',)
+    fields = ('image', 'image_tmb')
 
 
 @admin.register(Item)

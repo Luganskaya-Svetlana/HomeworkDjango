@@ -1,5 +1,7 @@
 from django.db import models
 from sorl.thumbnail import get_thumbnail
+from django_cleanup.signals import cleanup_pre_delete
+from sorl.thumbnail import delete
 
 
 class PublishedBaseModel(models.Model):
@@ -28,3 +30,8 @@ class ImageBaseModel(models.Model):
     @property
     def get_img(self):
         return get_thumbnail(self.image, '300x300', crop='center', quality=51)
+
+    def sorl_delete(**kwargs):
+        delete(kwargs['file'])
+
+    cleanup_pre_delete.connect(sorl_delete)
