@@ -12,7 +12,6 @@ class ModelTest(TestCase):
                                                slug='test-category-slug')
         cls.tag = Tag.objects.create(name='Тестовый тэг',
                                      slug='test-tag-slug')
-        cls.image = '/media/image'
 
     def test_unable_create_without_words(self):
         wrong_words = ['', 'нероскошно', 'йлцорудыфвпревосходнойцуйцлур']
@@ -37,7 +36,7 @@ class ModelTest(TestCase):
     def create_item(self, text):
         self.item = Item(name='Тест',
                          category=self.category,
-                         text=text, image=self.image)
+                         text=text)
         self.item.full_clean()
         self.item.save()
         self.item.tags.add(self.tag)
