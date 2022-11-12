@@ -40,6 +40,11 @@ cd mysite
 py manage.py migrate
 py manage.py loaddata catalog/fixtures/data.json
 ```
+For creating superuser (to get access to the admin panel) use:
+```bash
+cd mysite
+py manage.py createsuperuser
+```
 
 ### Run the project 
 ```bash
@@ -52,4 +57,5 @@ Confidential information is stored in the .env file.
 In settings.py there are default values of SECRET_KEY, DEBUG and ALLOWED_HOSTS, so you can just run the project. But if you want to change default values, create .env file, copy text from env.example, paste it to .env and make desired changes.
 
 ### Entity Relationship Diagram
-![ERD](https://user-images.githubusercontent.com/94749729/199280714-68c5ceb0-b694-4460-aebe-1871babfd243.png)
+![ERDv2](https://user-images.githubusercontent.com/94749729/201458600-3b4a0d66-68c1-4fff-b68d-2ef086da9f84.png)
+
