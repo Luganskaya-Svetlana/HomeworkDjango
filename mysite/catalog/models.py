@@ -58,9 +58,6 @@ class Item(PublishedBaseModel):
     tags = models.ManyToManyField(Tag,
                                   verbose_name='тэги')
 
-    image = models.ImageField('изображение', upload_to='media/%Y/%m',
-                              default='')
-
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
@@ -69,24 +66,20 @@ class Item(PublishedBaseModel):
     def __str__(self):
         return self.name
 
-    @property
-    def get_img(self):
-        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
-
-    def image_tmb(self):
-        if self.image:
+    def main_image_tmb(self):
+        if self.main_image:
             return mark_safe(
-                f'<img src="{self.get_img.url}">'
+                f'<img src="{self.main_image.get_img.url}">'
             )
         return 'Нет изображения'
 
-    image_tmb.short_description = 'превью'
-    image_tmb.allow_tags = True
+    main_image_tmb.short_description = 'превью'
+    main_image_tmb.allow_tags = True
 
 
 class GalleryImage(ImageBaseModel):
     item = models.ForeignKey(Item, on_delete=models.CASCADE,
-                             verbose_name='товар')
+                             verbose_name='товар', null=True)
 
     def image_tmb(self):
         if self.image:
@@ -108,6 +101,9 @@ class GalleryImage(ImageBaseModel):
 
 
 class MainImage(ImageBaseModel):
+    item = models.OneToOneField(Item, on_delete=models.CASCADE,
+                                verbose_name='товар', null=True)
+
     class Meta:
         verbose_name = 'главное изображение'
         verbose_name_plural = 'главные изображения'

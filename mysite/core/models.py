@@ -22,6 +22,9 @@ class ImageBaseModel(models.Model):
     image = models.ImageField('изображение', upload_to='media/%Y/%m',
                               default='')
 
+    class Meta:
+        abstract = True
+
     @property
     def get_img(self):
         return get_thumbnail(self.image, '300x300', crop='center', quality=51)
