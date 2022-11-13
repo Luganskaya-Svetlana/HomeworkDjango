@@ -8,21 +8,6 @@
             <li><a href="{% url 'homepage:home' %}" class="nav-link {% if view_name == 'homepage:home' %}disabled{% endif %}">На главную</a></li>
             <li><a href="{% url 'about:description' %}" class="nav-link {% if view_name == 'about:description' %}disabled{% endif %}">О проекте</a></li>
             <li><a href="{% url 'catalog:list' %}" class="nav-link {% if view_name == 'catalog:list' %}disabled{% endif %}">Список товаров</a></li>
-            {% comment %} {% if view_name == 'homepage:home'%}
-                <li><a href="{% url 'homepage:home' %}"><b>На главную</b></a></li>
-            {% else %}
-                <li><a href="{% url 'homepage:home' %}">На главную</a></li> {% endcomment %}
-            {% comment %} {% endif %} {% endcomment %}
-            {% comment %} {% if view_name == 'about:description' %}
-                <li><a href="{% url 'about:description' %}"><b>О проекте</b></a></li>
-            {% else %}
-                <li><a href="{% url 'about:description' %}">О проекте</a></li>
-            {% endif %}
-            {% if view_name == 'catalog:list'%}
-                <li><a href="{% url 'catalog:list'%}"><b>Список товаров</b></a></li>
-            {% else %}
-                <li><a href="{% url 'catalog:list'%}">Список товаров</a></li>
-            {% endif %} {% endcomment %}
         </ul>
         {% endwith %}
     </div>
