@@ -58,6 +58,8 @@ class Item(PublishedBaseModel):
     tags = models.ManyToManyField(Tag,
                                   verbose_name='тэги')
 
+    is_on_main = models.BooleanField('показывать на главной', default=False)
+
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
