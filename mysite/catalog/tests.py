@@ -49,8 +49,10 @@ class StaticURLTests(TestCase):
 
 
 class RegexTests(TestCase):
+    fixtures = ["data.json"]
+
     def test_catalog_normal_resp_endpoint(self):
-        endpoints = ('/catalog/123/', '/catalog/12/', '/catalog/1/')
+        endpoints = ('/catalog/3/', '/catalog/2/', '/catalog/1/')
         self.run_tests(endpoints, 200)
 
     def test_catalog_unnormal_resp_endpoint(self):
