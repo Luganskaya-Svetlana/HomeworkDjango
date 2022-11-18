@@ -12,6 +12,6 @@ def item_list(request):
 
 def item_detail(request, pk):
     template_name = 'catalog/item_detail.html'
-    item = get_object_or_404(Item.objects.published(), pk=int(pk))
+    item = get_object_or_404(Item.objects.published(), pk=pk)
     context = {'item': item, }
     return render(request, template_name, context)
