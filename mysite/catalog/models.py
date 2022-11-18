@@ -53,6 +53,7 @@ class ItemManager(models.Manager):
                                    queryset=Tag.objects
                                                .all()
                                                .filter(is_published=True)))
+                .only('name', 'text', 'category__id', 'category__name')
         )
 
 
