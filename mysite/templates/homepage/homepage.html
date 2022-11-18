@@ -3,6 +3,9 @@
 {% load static %}
 
 {% block content %}
-    <h1>Это главная</h1>
     <img class="mx-auto d-block" src="{% static 'img/cat.jpg' %}" alt="photo" width="600">
+    <h1>Список хотелок Клеопатры</h1>
+    {% for item in items %}
+        {% include "includes/item_card.html" %}
+    {% endfor %}
 {% endblock %}

@@ -1,6 +1,7 @@
 from core.models import ImageBaseModel, PublishedBaseModel, SlugBaseModel
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models.query import Prefetch
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
@@ -41,7 +42,18 @@ class Category(PublishedBaseModel, SlugBaseModel):
         return self.name
 
 
+class ItemManager(models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+                .filter(is_published=True)
+                .select_related('category')
+                .prefetch_related(Prefetch('tags', queryset=Tag.objects.all()))
+        )
+
+
 class Item(PublishedBaseModel):
+    objects = ItemManager()
     name = models.CharField('название товара',
                             max_length=150,
                             help_text='Максимум 150 символов',
