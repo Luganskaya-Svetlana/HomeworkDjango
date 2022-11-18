@@ -1,5 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from catalog.models import Item
 
 
@@ -11,4 +11,7 @@ def item_list(request):
 
 
 def item_detail(request, pk):
-    return HttpResponse(f'Подробно о прекрасном элементе с primary key {pk}')
+    template_name = 'catalog/item_detail.html'
+    item = get_object_or_404(Item.objects.published(), pk=int(pk))
+    context = {'item': item, }
+    return render(request, template_name, context)
