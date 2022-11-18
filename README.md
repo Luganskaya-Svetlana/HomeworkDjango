@@ -57,5 +57,5 @@ Confidential information is stored in the .env file.
 In settings.py there are default values of SECRET_KEY, DEBUG and ALLOWED_HOSTS, so you can just run the project. But if you want to change default values, create .env file, copy text from env.example, paste it to .env and make desired changes.
 
 ### Entity Relationship Diagram
-![ERDv2](https://user-images.githubusercontent.com/94749729/201458600-3b4a0d66-68c1-4fff-b68d-2ef086da9f84.png)
+![ERDv3](https://user-images.githubusercontent.com/94749729/202796340-31616927-4e12-41dd-b618-cfd1f52a020f.png)
 
