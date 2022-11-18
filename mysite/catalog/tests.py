@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
+from django.urls import reverse
 
 from .models import Category, Item, Tag
 
@@ -49,14 +50,14 @@ class StaticURLTests(TestCase):
 
 
 class RegexTests(TestCase):
-    fixtures = ["data.json"]
+    fixtures = ["data_for_tests.json"]
 
     def test_catalog_normal_resp_endpoint(self):
         endpoints = ('/catalog/3/', '/catalog/2/', '/catalog/1/')
         self.run_tests(endpoints, 200)
 
     def test_catalog_unnormal_resp_endpoint(self):
-        endpoints = ('/catalog/0/', '/catalog/01', '/catalog/000/',
+        endpoints = ('/catalog/0/', '/catalog/01/', '/catalog/000/',
                      'catalog/-1/', '/catalog/12s/', '/catalog/s12',
                      '/catalog/0a/', 'catalog/a0/', 'catalog/a0a/',
                      'catalog/1a0/', '/catalog/1-1/', '/catalog/1+1/',
@@ -72,3 +73,46 @@ class RegexTests(TestCase):
             with self.subTest(endpoint=endpoint):
                 response = Client().get(endpoint)
                 self.assertEqual(response.status_code, expected_status)
+
+
+class ItemListPageTests(TestCase):
+    fixtures = ['data_for_tests.json']
+
+    def test_correct_context(self):
+        response = Client().get(reverse('catalog:list'))
+        self.assertIn('items', response.context)
+
+    def test_correct_len_context(self):
+        response = Client().get(reverse('catalog:list'))
+        self.assertEqual(len(response.context['items']), 5)
+
+    def test_correct_sort_context(self):
+        response = Client().get(reverse('catalog:list'))
+        self.assertEqual(response.context['items'][0].id, 1)
+        self.assertEqual(response.context['items'][4].id, 5)
+
+
+class ItemDetailPageTests(TestCase):
+    fixtures = ['data_for_tests.json']
+
+    def test_not_found(self):
+        self.run_tests(['/catalog/6/', '/catalog/123/', '/catalog/1000/'], 404)
+        # в запросах id скрытых или несуществующих товаров
+
+    def test_items_found(self):
+        self.run_tests(['/catalog/1/', '/catalog/2/', '/catalog/3/',
+                        '/catalog/4/', '/catalog/5/'], 200)
+
+    def run_tests(self, endpoints, status_code):
+        for endpoint in endpoints:
+            with self.subTest(endpoint=endpoint):
+                response = Client().get(endpoint)
+                self.assertEqual(response.status_code, status_code)
+
+    def test_correct_context(self):
+        endpoints = ['/catalog/1/', '/catalog/2/', '/catalog/3/',
+                     '/catalog/4/', '/catalog/5/']
+        for endpoint in endpoints:
+            with self.subTest(endpoint=endpoint):
+                response = Client().get(endpoint)
+                self.assertIn('item', response.context)
