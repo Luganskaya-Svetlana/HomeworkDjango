@@ -48,7 +48,11 @@ class ItemManager(models.Manager):
             self.get_queryset()
                 .filter(is_published=True)
                 .select_related('category')
-                .prefetch_related(Prefetch('tags', queryset=Tag.objects.all()))
+                .prefetch_related(Prefetch
+                                  ('tags',
+                                   queryset=Tag.objects
+                                               .all()
+                                               .filter(is_published=True)))
         )
 
 

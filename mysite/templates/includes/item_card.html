@@ -1,10 +1,10 @@
 <div class="col-md6 border rounded">
-<h4>{{item.name}}</h4>
+<h4>{{ item.name }}</h4>
 <p><b>Категория:</b> {{item.category.name}}</p>
 <p><b>Описание:</b> {{item.text | truncatewords_html:10}}</p>
 <p><b>Тэги:</b> 
-    {%for tag in item.tags.all%}
-    <p>{{tag.name}}</p>
-    {%endfor%}
+    {% for tag in item.tags.all %}
+    <p>{{ tag.name }}</p>
+    {% endfor %}
 </p>
 </div>
