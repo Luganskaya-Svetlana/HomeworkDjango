@@ -19,8 +19,8 @@ class GalleryImageInline(admin.TabularInline):
 class ItemAdmin(admin.ModelAdmin):
     fields = ('name', 'text', 'category', 'tags', 'is_published', 'is_on_main')
     inlines = (MainImageInline, GalleryImageInline)
-    list_display = ('name', 'is_published', 'main_image_tmb',)
-    list_editable = ('is_published',)
+    list_display = ('name', 'is_published', 'main_image_tmb', 'is_on_main')
+    list_editable = ('is_published', 'is_on_main')
     list_display_links = ('name',)
     filter_horizontal = ('tags',)
 
@@ -29,12 +29,14 @@ class ItemAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     fields = ('name', 'slug', 'is_published')
     list_display = ('name', 'is_published')
+    list_editable = ('is_published',)
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     fields = ('name', 'slug', 'weight', 'is_published')
     list_display = ('name', 'is_published')
+    list_editable = ('is_published',)
 
 
 @admin.register(GalleryImage)
