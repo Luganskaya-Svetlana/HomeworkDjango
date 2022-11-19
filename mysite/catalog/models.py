@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.query import Prefetch
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
+from django.urls import reverse
 
 from .validators import validate_perfect
 
@@ -94,6 +95,9 @@ class Item(PublishedBaseModel):
 
     main_image_tmb.short_description = 'превью'
     main_image_tmb.allow_tags = True
+
+    def get_absolute_url(self):
+        return reverse('catalog:detail', kwargs={'pk': self.pk})
 
 
 class GalleryImage(ImageBaseModel):

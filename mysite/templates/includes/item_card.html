@@ -1,8 +1,8 @@
 <div class="card">
-    <h4 class="card-title"><a href="/catalog/{{item.id}}">{{ item.name }}</a></h4>
+    <h4 class="card-title"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></h4>
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name != 'catalog:list'%}<p><b>Категория:</b> {{item.category.name}}</p>{% endif %}
-        <p><b>Описание: </b>{% if view_name != 'catalog:detail' %}{{item.text | truncatewords_html:10}}{% else %}{{item.text}}{% endif %}</p>
+        <p><b>Описание: </b>{% if view_name != "catalog:detail" %}{{item.text | truncatewords_html:10}}{% else %}{{item.text}}{% endif %}</p>
         <div><b>Тэги:</b> 
         {% for tag in item.tags.all %}
             <p>{{ tag.name }}</p>
