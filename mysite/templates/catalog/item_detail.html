@@ -1,13 +1,4 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col-md6 border rounded">
-    <h4>{{ item.name }}</h4>
-    <p><b>Категория:</b> {{item.category.name}}</p>
-    <p><b>Описание:</b> {{item.text}}</p>
-    <p><b>Тэги:</b> 
-        {% for tag in item.tags.all %}
-            <p>{{ tag.name }}</p>
-        {% endfor %}
-    </p>
-</div>
+    {% include "includes/item_card.html"%}
 {% endblock %}
