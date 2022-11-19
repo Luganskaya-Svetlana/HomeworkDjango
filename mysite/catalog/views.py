@@ -5,7 +5,7 @@ from catalog.models import Item
 
 def item_list(request):
     template_name = 'catalog/item_list.html'
-    items = Item.objects.published().order_by('category')
+    items = Item.objects.published().order_by('category', 'name')
     context = {'items': items, }
     return render(request, template_name, context)
 

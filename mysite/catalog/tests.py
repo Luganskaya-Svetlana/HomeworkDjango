@@ -88,8 +88,8 @@ class ItemListPageTests(TestCase):
 
     def test_correct_sort_context(self):
         response = Client().get(reverse('catalog:list'))
-        self.assertEqual(response.context['items'][0].id, 1)
-        self.assertEqual(response.context['items'][4].id, 5)
+        self.assertEqual(response.context['items'][0].id, 2)
+        self.assertEqual(response.context['items'][4].id, 4)
 
 
 class ItemDetailPageTests(TestCase):
