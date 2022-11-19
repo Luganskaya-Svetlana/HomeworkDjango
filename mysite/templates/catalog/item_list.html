@@ -4,9 +4,14 @@
 
 {% block content %}
     <h1>Список товаров</h1>
-    {% for item in items %}
-        {% ifchanged item.category.name %} <div><h2>{{item.category.name}}</h2></div> {% endifchanged %}
-        {% include "includes/item_card.html" %}
-    {% endfor %}
+    {% if items|length > 0 %}
+        {% for item in items %}
+            {% ifchanged item.category.name %} <div><h2>{{item.category.name}}</h2></div> {% endifchanged %}
+            {% include "includes/item_card.html" %}
+        {% endfor %}
+    {% else %}
+        <p>Пока пусто</p>
+        {% include "includes/placeholder.html"%}
+    {% endif %}
 
 {% endblock %}

@@ -5,7 +5,12 @@
 {% block content %}
     <img class="mx-auto d-block" src="{% static 'img/cat.jpg' %}" alt="photo" width="600">
     <h1>Список хотелок Клеопатры</h1>
-    {% for item in items %}
-        {% include "includes/item_card.html" %}
-    {% endfor %}
+    {% if items|length > 0 %}
+        {% for item in items %}
+            {% include "includes/item_card.html" %}
+        {% endfor %}
+    {% else %}
+        <p>Пока пусто</p>
+        {% include "includes/placeholder.html"%}
+    {% endif %}
 {% endblock %}
