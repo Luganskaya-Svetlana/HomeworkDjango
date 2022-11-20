@@ -7,7 +7,7 @@
     <h1>Список хотелок Клеопатры</h1>
     {% if items|length > 0 %}
         {% for item in items %}
-            {% include "includes/item_card.html" %}
+            {% include "catalog/includes/item_card.html" %}
         {% endfor %}
     {% else %}
         <p><h5>Пока пусто</h5></p>
