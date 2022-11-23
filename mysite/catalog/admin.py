@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, GalleryImage, Item, Tag, MainImage
+from .models import Category, GalleryImage, Item, MainImage, Tag
 
 
 class MainImageInline(admin.TabularInline):

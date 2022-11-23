@@ -1,6 +1,5 @@
-from django.shortcuts import render
-
 from catalog.models import Item
+from django.shortcuts import render
 
 
 def home(request):

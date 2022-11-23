@@ -2,9 +2,9 @@ from core.models import ImageBaseModel, PublishedBaseModel, SlugBaseModel
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models.query import Prefetch
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
-from django.urls import reverse
 
 from .validators import validate_perfect
 
