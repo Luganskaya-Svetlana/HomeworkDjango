@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .forms import FeedbackForm
 from .models import Feedback
+from django.conf import settings
 
 
 def feedback(request):
@@ -15,7 +16,7 @@ def feedback(request):
             'Feedback',
             text,
             'user@example.com',
-            ['admin@example.com'],
+            [settings.ADMIN_MAIL],
             fail_silently=False,)
         feedback = Feedback(text=text)
         feedback.save()

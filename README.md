@@ -54,7 +54,7 @@ py manage.py runserver
 
 ### Configure .env
 Confidential information is stored in the .env file.
-In settings.py there are default values of SECRET_KEY, DEBUG and ALLOWED_HOSTS, so you can just run the project. But if you want to change default values, create .env file, copy text from env.example, paste it to .env and make desired changes.
+In settings.py there are default values of SECRET_KEY, DEBUG, ALLOWED_HOSTS and ADMIN_MAIL, so you can just run the project. But if you want to change default values, create .env file, copy text from env.example, paste it to .env and make desired changes.
 
 ### Entity Relationship Diagram
 ![ERDv4](https://user-images.githubusercontent.com/94749729/203385407-0cbbf750-bf13-4436-94c4-1adf175aa095.png)

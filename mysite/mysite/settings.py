@@ -13,6 +13,8 @@ DEBUG = os.getenv('DEBUG', default='True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default='127.0.0.1').split(',')
 
+ADMIN_MAIL = os.getenv('ADMIN_MAIL', default='404@example.com')
+
 INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
