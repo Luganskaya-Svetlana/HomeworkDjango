@@ -19,15 +19,22 @@ class FeedbackFormTests(TestCase):
         name_label = self.form.fields['text'].label
         self.assertEqual('Текст вашего сообщения', name_label)
 
+    def test_mail_label(self):
+        mail_label = self.form.fields['mail'].label
+        self.assertEqual('Ваша почта', mail_label)
+
     def test_text_help_text(self):
         text_help_text = self.form.fields['text'].help_text
         self.assertEqual('Введите ваше сообщение', text_help_text)
 
     def test_redirect(self):
-        response = Client().post(reverse('feedback:feedback'), {'text': '...'})
+        endpoint = reverse('feedback:feedback')
+        response = Client().post(endpoint, {'text': '...', 'mail':
+                                            '200@example.com'})
         self.assertRedirects(response, reverse('feedback:feedback'))
 
     def test_create_feedback(self):
         feedback_count = Feedback.objects.count()
-        Client().post(reverse('feedback:feedback'), {'text': '...'})
+        endpoint = reverse('feedback:feedback')
+        Client().post(endpoint, {'text': '...', 'mail': '200@example.com'})
         self.assertEqual(Feedback.objects.count(), feedback_count + 1)

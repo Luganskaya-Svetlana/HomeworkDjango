@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.conf import settings
 
 from .forms import FeedbackForm
 from .models import Feedback
-from django.conf import settings
 
 
 def feedback(request):
@@ -12,11 +12,19 @@ def feedback(request):
     form = FeedbackForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         text = form.cleaned_data['text']
+        user_mail = form.cleaned_data['mail']
         send_mail(
             'Feedback',
             text,
             'user@example.com',
             [settings.ADMIN_MAIL],
+            fail_silently=False,)
+        send_mail(
+            'Your feedback',
+            ('Здравствуйте! Мы получили от вас следующее сообщение: '
+             f'"{text}" Спасибо за ваш отзыв.'),
+            'user@example.com',
+            [user_mail],
             fail_silently=False,)
         feedback = Feedback(text=text)
         feedback.save()
