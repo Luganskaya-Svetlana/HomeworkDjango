@@ -24,7 +24,8 @@ class FeedbackFormTests(TestCase):
 
     def test_text_help_text(self):
         text_help_text = self.form.fields['text'].help_text
-        self.assertEqual('Введите ваше сообщение', text_help_text)
+        self.assertEqual(('Пожелание хорошего настроения вместо бесполезного '
+                          'хелптекста :)'), text_help_text)
 
     def test_redirect(self):
         endpoint = reverse('feedback:feedback')

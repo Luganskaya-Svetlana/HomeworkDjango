@@ -3,10 +3,11 @@
 {% load static %}
 
 {% block content %}
+<h4>Оставить отзыв</h5>
     <form method="post">
         {% csrf_token %}
         <ul>
-            {{ form.as_ul }}
+            {{ form.as_p }}
         </ul>
         <input type="submit" value="Отправить">
     </form>
