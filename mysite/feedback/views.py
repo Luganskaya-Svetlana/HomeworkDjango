@@ -26,7 +26,7 @@ def feedback(request):
             'user@example.com',
             [user_mail],
             fail_silently=False,)
-        feedback = Feedback(text=text)
+        feedback = Feedback(text=text, mail=user_mail)
         feedback.save()
         messages.success(request, 'Отзыв отправлен')
         return redirect('feedback:feedback')
