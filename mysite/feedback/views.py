@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.contrib import messages
 
 from .forms import FeedbackForm
 from .models import Feedback
@@ -18,6 +19,7 @@ def feedback(request):
             fail_silently=False,)
         feedback = Feedback(text=text)
         feedback.save()
+        messages.success(request, 'Отзыв отправлен')
         return redirect('feedback:feedback')
     context = {'form': form}
     return render(request, template, context)
