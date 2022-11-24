@@ -16,14 +16,14 @@ def feedback(request):
         send_mail(
             'Feedback',
             text,
-            'user@example.com',
+            user_mail,
             [settings.ADMIN_MAIL],
             fail_silently=False,)
         send_mail(
             'Your feedback',
             ('Здравствуйте! Мы получили от вас следующее сообщение: '
              f'"{text}" Спасибо за ваш отзыв.'),
-            'user@example.com',
+            'kleopatra@example.com',
             [user_mail],
             fail_silently=False,)
         feedback = Feedback(text=text, mail=user_mail)
