@@ -1,16 +1,21 @@
 from catalog.models import Item
-from django.shortcuts import get_object_or_404, render
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 
-def item_list(request):
+class ItemsView(ListView):
+    model = Item
     template_name = 'catalog/item_list.html'
-    items = Item.objects.published().order_by('category', 'name')
-    context = {'items': items, }
-    return render(request, template_name, context)
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return Item.objects.published().order_by('category', 'name')
 
 
-def item_detail(request, pk):
+class ItemView(DetailView):
+    model = Item
     template_name = 'catalog/item_detail.html'
-    item = get_object_or_404(Item.objects.published(), pk=pk)
-    context = {'item': item, }
-    return render(request, template_name, context)
+    context_object_name = 'item'
+
+    def get_queryset(self):
+        return Item.objects.published()

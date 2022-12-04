@@ -1,9 +1,12 @@
 from catalog.models import Item
-from django.shortcuts import render
+from django.views.generic.list import ListView
 
 
-def home(request):
+class Homepage(ListView):
+    model = Item
     template_name = 'homepage/homepage.html'
-    items = Item.objects.published().order_by('name').filter(is_on_main=True)
-    context = {'items': items, }
-    return render(request, template_name, context)
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return (Item.objects.published().order_by('name')
+                                        .filter(is_on_main=True))
