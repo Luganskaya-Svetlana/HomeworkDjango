@@ -24,7 +24,16 @@ class Tag(PublishedBaseModel, SlugBaseModel):
         return self.name
 
 
+class CategoryManager(models.Manager):
+    def published(self):
+        return (self.get_queryset()
+                    .filter(is_published=True)
+                    .only('slug', 'name')
+                    .order_by('name'))
+
+
 class Category(PublishedBaseModel, SlugBaseModel):
+    objects = CategoryManager()
     name = models.CharField('название категории',
                             max_length=150,
                             help_text='Максимум 150 символов',
@@ -41,6 +50,9 @@ class Category(PublishedBaseModel, SlugBaseModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('catalog:category', kwargs={'slug': self.slug})
 
 
 class ItemManager(models.Manager):

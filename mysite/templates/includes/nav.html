@@ -8,6 +8,7 @@
             <li><a href="{% url 'homepage:home' %}" class="nav-link {% if view_name == 'homepage:home' %}disabled{% endif %}">На главную</a></li>
             <li><a href="{% url 'about:description' %}" class="nav-link {% if view_name == 'about:description' %}disabled{% endif %}">О проекте</a></li>
             <li><a href="{% url 'catalog:list' %}" class="nav-link {% if view_name == 'catalog:list' %}disabled{% endif %}">Список товаров</a></li>
+            <li><a href="{% url 'catalog:categories' %}" class="nav-link {% if view_name == 'catalog:categories' %}disabled{% endif %}">Список категорий</a></li>
             <li><a href="{% url 'feedback:feedback' %}" class="nav-link {% if view_name == 'feedback:feedback' %}disabled{% endif %}">Оставить отзыв</a></li>
         </ul>
         {% endwith %}

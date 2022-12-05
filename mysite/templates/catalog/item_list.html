@@ -3,11 +3,13 @@
 {% load static %}
 
 {% block content %}
-    <h1>Список товаров</h1>
+    <h1>{{ title }}</h1>
     {% if items|length > 0 %}
         {% for item in items %}
-            {% ifchanged item.category.name %} <div><h2>{{item.category.name}}</h2></div> {% endifchanged %}
+          {% with request.resolver_match.view_name as view_name %}
+            {% if view_name == 'catalog:list' %}{% ifchanged item.category.name %} <div><h2>{{item.category.name}}</h2></div> {% endifchanged %}{% endif %}
             {% include "catalog/includes/item_card.html" %}
+          {% endwith %}
         {% endfor %}
     {% else %}
         <p><h5>Пока пусто</h5></p>
