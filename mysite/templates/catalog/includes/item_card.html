@@ -1,7 +1,12 @@
 <div class="card">
     <h4 class="card-title"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></h4>
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name != 'catalog:list'%}<p><b>Категория:</b> {{item.category.name}}</p>{% endif %}
+        {% if view_name == "catalog:detail"%}
+            {% if image %}
+                <img class="mx-auto d-block" src="../../media/{{image.image}}" alt="photo" width="600">
+            {% endif %}
+        {% endif %}
+        {% if view_name != "catalog:list"%}<p><b>Категория:</b> {{item.category.name}}</p>{% endif %}
         <p><b>Описание: </b>{% if view_name != "catalog:detail" %}{{item.text | truncatewords_html:10}}{% else %}{{item.text}}{% endif %}</p>
         <div><b>Тэги:</b> 
         {% for tag in item.tags.all %}
