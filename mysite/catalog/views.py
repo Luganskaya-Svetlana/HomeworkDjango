@@ -1,4 +1,4 @@
-from catalog.models import Item, Category
+from catalog.models import Item, Category, MainImage
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
@@ -25,6 +25,14 @@ class ItemView(DetailView):
 
     def get_queryset(self):
         return Item.objects.published()
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        item_pk = self.kwargs['pk']
+        data['image'] = (MainImage.objects.filter(item_id=item_pk)
+                                          .first())
+        print(data['image'])
+        return data
 
 
 class ItemCategoryView(ListView):
