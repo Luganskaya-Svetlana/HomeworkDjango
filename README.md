@@ -37,6 +37,7 @@ Commited db is just an example.
 For loading data to a new db use:
 ```bash
 cd mysite
+py manage.py makemigrations
 py manage.py migrate
 py manage.py loaddata catalog/fixtures/data.json
 ```
