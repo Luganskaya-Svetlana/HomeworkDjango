@@ -1,0 +1,247 @@
+[
+{
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "slug": "new",
+        "name": "Новые товары"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "slug": "discount",
+        "name": "Товары со скидкой"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "slug": "popular",
+        "name": "Популярные товары"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+        "is_published": true,
+        "slug": "out_of_stock",
+        "name": "Товара нет в наличии"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+        "is_published": true,
+        "slug": "in_stock",
+        "name": "Товар в наличии"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 7,
+    "fields": {
+        "is_published": false,
+        "slug": "not_published",
+        "name": "Скрытый тэг"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "slug": "food",
+        "name": "Еда",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "slug": "clothes",
+        "name": "Одежда",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "slug": "school",
+        "name": "Товары для школы",
+        "weight": 101
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "is_published": false,
+        "slug": "not_published",
+        "name": "Скрытая",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+        "is_published": true,
+        "name": "Шоколадка",
+        "text": "Превосходно поднимет настроение :)",
+        "category": 1,
+        "is_on_main": true,
+        "tags": [
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+        "is_published": true,
+        "name": "Мороженое",
+        "text": "Превосходно поможет охладиться в жаркий летний день.",
+        "category": 1,
+        "is_on_main": false,
+        "tags": [
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+        "is_published": true,
+        "name": "Зимняя куртка",
+        "text": "Превосходно согреет зимой. И будет роскошно смотреться на любом человеке.",
+        "category": 2,
+        "is_on_main": false,
+        "tags": [
+            3,
+            5,
+            7
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+        "is_published": true,
+        "name": "Тетрадка в клетку",
+        "text": "Благодаря этой тетрадке любой ученик будет учиться просто роскошно!",
+        "category": 3,
+        "is_on_main": false,
+        "tags": [
+            2,
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+        "is_published": true,
+        "name": "Ручка",
+        "text": "С помощью этой ручки любой первоклассник будет превосходно писать.",
+        "category": 3,
+        "is_on_main": true,
+        "tags": [
+            3,
+            5,
+            7
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 6,
+    "fields": {
+        "is_published": false,
+        "name": "Скрытый товар",
+        "text": "Роскошно, ведь этот товар никому нельзя показывать!",
+        "category": 3,
+        "is_on_main": false,
+        "tags": [
+            4
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 7,
+    "fields": {
+        "is_published": true,
+        "name": "Товар со скрытой категорией",
+        "text": "Роскошно, просто роскошно!",
+        "category": 5,
+        "is_on_main": true,
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 8,
+    "fields": {
+        "is_published": true,
+        "name": "Мочалка для кошки",
+        "text": "Роскошно!\r\nЭто же очень, очень, очень, очень, очень, очень длинное описание (больше 10 слов!)",
+        "category": 2,
+        "is_on_main": true,
+        "tags": [
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.galleryimage",
+    "pk": 1,
+    "fields": {
+        "image": "media/2022/11/Клепец_268dLxS.jpg",
+        "item": 5
+    }
+},
+{
+    "model": "catalog.galleryimage",
+    "pk": 2,
+    "fields": {
+        "image": "media/2022/11/КлепецНефец_LTA2E9B.jpg",
+        "item": 5
+    }
+},
+{
+    "model": "catalog.mainimage",
+    "pk": 3,
+    "fields": {
+        "image": "media/2022/11/обои_звезды.jpg",
+        "item": 5
+    }
+},
+{
+    "model": "catalog.mainimage",
+    "pk": 4,
+    "fields": {
+        "image": "media/2022/11/cat.jpg",
+        "item": 8
+    }
+}
+]
